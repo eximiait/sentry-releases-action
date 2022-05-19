@@ -279,7 +279,8 @@ const run = async () => {
     // Set commits
     await cli.releases.setCommits(releaseName, {
       repo: 'repo',
-      auto: true,
+      auto: false,
+      options: '--set-commit '+ releaseName,
     });
 
     /* istanbul ignore next */
