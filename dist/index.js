@@ -264,9 +264,14 @@ const run = async () => {
     if (releaseNamePrefix) {
       releaseName = `${releaseNamePrefix}${tag}`;
     }
+    
+    const extraSentryArgs = core.getInput('extraSentryOptions:', {
+      required: false,
+    });
 
     core.info(`Tag is: ${tag}`);
     core.info(`Sentry release is: ${releaseName}`);
+    core.info(`Extra args is: ${extraSentryArgs}`);
 
     // Create a release
     await cli.releases.new(releaseName);
@@ -291,7 +296,7 @@ const run = async () => {
     const sentryCliPath = SentryCli.getPath();
 
     core.info(`sentryCliPath: ${sentryCliPath}`);
-    await runCommand(sentryCliPath, ['releases', 'deploys', releaseName, 'new', '-e', environment]);
+    await runCommand(sentryCliPath, ['releases', 'deploys', releaseName, 'new', '-e', environment, extraSentryArgs ]);
 
     // Finalize the release
     await cli.releases.finalize(releaseName);
