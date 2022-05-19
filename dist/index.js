@@ -265,7 +265,7 @@ const run = async () => {
       releaseName = `${releaseNamePrefix}${tag}`;
     }
     
-    const extraSentryArgs = core.getInput('extraSentryOptions:', {
+    const extraSentryArgs = core.getInput('extraSentryOptions', {
       required: false,
     });
 
